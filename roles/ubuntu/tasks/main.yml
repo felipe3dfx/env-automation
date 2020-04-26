@@ -1,0 +1,11 @@
+- name: Set up sudo for the user
+  become: true
+  lineinfile:
+    dest: /etc/sudoers
+    line: '{{ var_user }} ALL=(ALL) NOPASSWD: ALL'
+
+- name: Upgrade system packages
+  become: true
+  apt:
+    upgrade: dist
+    update_cache: yes

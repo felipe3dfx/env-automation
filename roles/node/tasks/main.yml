@@ -1,0 +1,25 @@
+- name: Set nodejs apt source
+  become: true
+  template:
+    src: nodesource.list.j2
+    dest: /etc/apt/sources.list.d/nodesource.list
+
+- name: Import nodejs signing key
+  become: true
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
+
+- name: Install nodejs packages
+  apt:
+    pkg: nodejs
+    state: present
+    update_cache: yes
+
+- name: Install npm package globally.
+  npm:
+    name: 
+      - neovim
+      - eslint
+      - sass-lint
+    global: yes

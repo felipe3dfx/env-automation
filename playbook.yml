@@ -1,0 +1,28 @@
+---
+- name: Provision a development enviroment based on Ubuntu 20.04 LTS
+
+  hosts: local
+
+  vars_prompt:
+  - name: 'var_user'
+    prompt: 'local user name'
+    default: 'root'
+    private: no
+
+  vars_files:
+    - vars/variables.yml
+    - vars/global_env.yml
+
+  roles:
+    - {role: 'ubuntu', tags: 'ubuntu'}
+    - {role: 'apt', tags: 'apt'}
+    - {role: 'snap', tags: 'snap'}
+    - {role: 'python', tags: 'python'}
+    - {role: 'git', tags: 'git'}
+    - {role: 'ssh', tags: 'ssh'}
+    - {role: 'zsh', tags: 'zsh'}
+    - {role: 'tmux', tags: 'tmux'}
+    - {role: 'node', tags: 'node'}
+    - {role: 'nvim', tags: 'nvim'}
+    - {role: 'alacritty', tags: 'alacritty'}
+    - {role: 'docker', tags: 'docker'}

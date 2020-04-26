@@ -1,0 +1,14 @@
+- name: Install Visual Studio Code
+  snap:
+    name: 
+      - code 
+      - skype
+      - spotify
+    classic: yes
+
+- name: Install Snap packages
+  snap:
+    name:
+      - postman
+      - vlc
+      - mailspring

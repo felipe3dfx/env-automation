@@ -1,0 +1,43 @@
+- name: Make sure zsh are present
+  apt:
+    pkg: zsh
+    state: present
+
+- name: Make sure zplug are present
+  shell: git clone https://github.com/zplug/zplug {{ ZPLUG_HOME }}
+
+- name: Install rust
+  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+- name: install exa
+  shell: cargo install exa
+
+- name: Make sure variables are included
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
+
+- name: Make sure directories are present
+  file:
+    path: '{{ config_path }}'
+    state: directory
+
+- name: Make sure config files are generated
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ config_path }}/{{ item.path }}'
+  with_filetree: templates/zsh
+  when: item.state == 'file'
+
+- name: Make sure zshrc is present
+  template:
+    src: templates/.zshrc.j2
+    dest: ~/.zshrc
+
+- name: Make sure global .ignore is present
+  template:
+    src: templates/.ignore.j2
+    dest: ~/.ignore
+
+- name: Make sure to set brew zsh as default shell
+  shell: chsh -s $(which zsh)
+  become: true

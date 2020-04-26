@@ -1,0 +1,11 @@
+- name: Install pip
+  apt:
+    pkg: python3-pip
+    state: present
+
+- name: Install python packages
+  pip:
+    name: 
+      - prospector
+      - virtualenv
+    extra_args: --user

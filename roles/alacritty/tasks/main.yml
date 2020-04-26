@@ -1,0 +1,18 @@
+- name: Add alacritty ppa repository
+  apt_repository:
+    repo: ppa:mmstick76/alacritty
+
+- name: Make sure alacritty is present
+  apt:
+    pkg: alacritty
+    state: present
+
+- name: Make sure config directory is present
+  file:
+    path: ~/.config/alacritty
+    state: directory
+
+- name: Make sure config file is present
+  template:
+    src: templates/alacritty.yml.j2
+    dest: ~/.config/alacritty/alacritty.yml
