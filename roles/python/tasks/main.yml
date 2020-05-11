@@ -8,4 +8,5 @@
     name: 
       - prospector
       - virtualenv
+      - twine
     extra_args: --user
