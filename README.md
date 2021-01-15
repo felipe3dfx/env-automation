@@ -23,7 +23,7 @@ make install
 
 ## Features
 
-* Ubuntu 20.04 lts defaults configuration
+* Ubuntu/Pop!_OS defaults configuration
 * Apps installation via apt, snap
 * Snazzy theme for NVIM, ZSH, Alacrity
 * ZSH configuration, aliases, mappings, completition etc.

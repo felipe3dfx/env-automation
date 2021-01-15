@@ -1,7 +1,5 @@
 ---
-- name: Provision a development enviroment based on Ubuntu 20.04 LTS
-
-  hosts: localhost
+- hosts: localhost
   connection: local
 
   vars_prompt:
@@ -14,8 +12,8 @@
     - vars/variables.yml
 
   roles:
-    - {role: 'ubuntu', tags: 'ubuntu'}
-    - {role: 'apt', tags: 'apt'}
+    - {role: 'common', tags: 'common'}
+    - {role: 'packages', tags: 'packages'}
     - {role: 'snap', tags: 'snap'}
     - {role: 'python', tags: 'python'}
     - {role: 'git', tags: 'git'}
