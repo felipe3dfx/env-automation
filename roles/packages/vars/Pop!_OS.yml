@@ -35,3 +35,8 @@ apps:
 
   # Docker
   - docker
+
+rust:
+  - exa
+  - bat
+  - delta

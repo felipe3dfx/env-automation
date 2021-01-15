@@ -1,0 +1,42 @@
+---
+apps:
+  - software-properties-common
+  - webp
+  - curl
+  - ctags
+  - fzf
+  - git
+  - htop
+  - imagemagick
+  - jq
+  - nmap
+  - tldr
+  - tor
+  - tree
+  - wget
+  - yamllint
+  - unzip
+  - bat
+  - fd-find
+  - fonts-firacode
+  - gnome-tweak-tool
+  - qtile
+  - chrome-gnome-shell
+  - translate-shell
+
+  # Neovim
+  - neovim
+  - ripgrep
+
+  # Node
+  - nodejs
+  - yarn
+  - npm
+
+  # Docker
+  - docker
+
+rust:
+  - exa
+  - bat
+  - delta

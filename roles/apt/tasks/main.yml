@@ -1,7 +1,0 @@
----
-- name: Make sure apt packages are installed
-  become: true
-  apt:
-    name: '{{ apps }}'
-    state: latest
-    update_cache: true
