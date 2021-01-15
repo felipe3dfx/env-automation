@@ -15,7 +15,6 @@ apps:
   - wget
   - yamllint
   - unzip
-  - bat
   - fd-find
   - fonts-firacode
   - gnome-tweak-tool
@@ -30,6 +29,7 @@ apps:
   - libfreetype6-dev
   - libfontconfig1-dev
   - libxcb-xfixes0-dev
+  - libegl1-mesa-dev
 
   # Rust
   - exa

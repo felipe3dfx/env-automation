@@ -59,13 +59,13 @@ zplug "zsh-users/zsh-history-substring-search"
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
+zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 zplug "rupa/z", use:z.sh
 
 zplug "lukechilds/zsh-nvm"
 
-zplug "asdf-vm/asdf", \
-  use:asdf.sh
+zplug "asdf-vm/asdf", use:asdf.sh
 
 if ! zplug check; then
     printf "Install? [y/N]: "
@@ -97,7 +97,7 @@ alias e="$EDITOR"
 alias sed=gsed
 {% endif %}
 
-alias cat="bat --theme 'Monokai Extended Origin'"
+alias cat="batcat --theme 'Monokai Extended Origin'"
 alias ls=exa
 
 alias l="ls -1"
@@ -334,4 +334,4 @@ export FZF_DEFAULT_OPTS='
   --color info:144,prompt:161,spinner:135,pointer:135,marker:118
 '
 
-export FZF_PREVIEW_COMMAND='bat --theme Monokai Extended Origin {}'
+export FZF_PREVIEW_COMMAND='batcat --theme Monokai Extended Origin {}'

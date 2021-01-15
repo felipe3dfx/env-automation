@@ -7,6 +7,4 @@
     update_cache: true
 
 - name: Install rust
-  become: true
   shell: "curl https://sh.rustup.rs -sSf | sh -s -- -y"
-  changed_when: false
