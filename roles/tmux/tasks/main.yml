@@ -1,5 +1,6 @@
 ---
 - name: Make sure tmux is present
+  become: true
   apt:
     name: tmux
     state: present
