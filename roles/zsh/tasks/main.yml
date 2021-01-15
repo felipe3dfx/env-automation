@@ -1,6 +1,7 @@
 - name: Make sure zsh are present
+  become: true
   apt:
-    pkg: zsh
+    name: zsh
     state: present
 
 - name: Make sure zplug are present

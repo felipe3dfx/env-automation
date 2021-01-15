@@ -1,4 +1,6 @@
+---
 - name: Install APT packages
+  become: true
   apt:
     pkg:
       - docker.io
@@ -13,6 +15,7 @@
     enabled: yes
 
 - name: adding existing user '{{ var_user }}' to group docker
+  become: true
   user:
     name: '{{ var_user }}'
     groups: docker

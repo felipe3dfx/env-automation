@@ -1,3 +1,5 @@
+---
 config_path: ~/.config/zsh
-FZF_BASE: /usr/bin/fzf
+FZF_BASE: /usr/sbin/fzf
+JAVA_HOME: ''
 ZPLUG_HOME: ~/.zplug

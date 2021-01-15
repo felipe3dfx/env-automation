@@ -1,59 +1,31 @@
-- name: Make sure neovim is installed
-  apt:
-    pkg: nvim
-    state: present
-
+---
 - name: Make sure autoload directory exists
   file:
     path: '{{ autoload_path }}'
     state: directory
 
-- name: Check if vim-plug is installed
-  stat:
-    path: '{{ autoload_path }}/plug.vim'
-  register: vim_plug_folder
+- include: vim_plug.yml
+- include: python_venv.yml
 
-- name: Make sure vim-plug is installed
-  get_url:
-    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest: '{{ autoload_path }}/plug.vim'
-  when: not vim_plug_folder.stat.exists
-
-- name: Check if the python3_venv is present
-  stat:
-    path: '{{ python3_venv_path }}'
-  register: python3_venv_present
-
-- name: Make sure venvs are created for python3
-  shell: virtualenv -p python3 {{ python3_venv_path }}
-  when: not python3_venv_path.stat.exists
-
-- name: Make sure neovim libs are intalled to python3 venv
-  pip:
-    virtualenv: '{{ python3_venv_path }}'
-    virtualenv_python: python3
-    name: '{{ python3_libs }}'
-    state: present
+- name: Make sure undo dir is present
+  file:
+    path: '{{ config_path }}/undodir'
+    state: directory
 
 - name: Create directories
   file:
     path: '{{ config_path }}/{{ item.path }}'
     state: directory
-  with_filetree: templates/
+  with_filetree: '{{ role_path }}/templates/'
   when: item.state == 'directory'
 
 - name: Make sure config files are generated
   template:
     src: '{{ item.src }}'
     dest: '{{ config_path }}/{{ item.path }}'
-  with_filetree: templates/
+  with_filetree: '{{ role_path }}/templates/'
   when: item.state == 'file'
 
 - name: Make sure plugins are installed
   shell:
     nvim +PlugInstall +qall
-
-- name: Make sure vim-language-server is present
-  npm:
-    name: 'vim-language-server'
-    global: yes

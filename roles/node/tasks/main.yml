@@ -16,6 +16,11 @@
     state: present
     update_cache: yes
 
+- name: Make sure nvm folder present
+  file:
+    path: ~/.nvm
+    state: directory
+
 - name: Install npm package globally.
   npm:
     name: 

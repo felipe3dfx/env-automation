@@ -1,9 +1,8 @@
+---
 config_path: ~/.config/nvim
 
 plug_path: '{{ config_path }}/plugged'
-
 ftplugin_path: '{{ config_path }}/ftplugin'
-
 autoload_path: '{{ config_path }}/autoload'
 
 python3_venv_path: '{{ config_path }}/python3_venv'
@@ -11,3 +10,5 @@ python3_venv_path: '{{ config_path }}/python3_venv'
 python3_libs:
   - pynvim
   - neovim
+  - websocket-client
+  - sexpdata

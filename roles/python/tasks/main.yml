@@ -1,12 +1,12 @@
-- name: Install pip
-  apt:
-    pkg: python3-pip
-    state: present
-
+---
 - name: Install python packages
+  become: true
   pip:
-    name: 
-      - prospector
-      - virtualenv
-      - twine
-    extra_args: --user
+    name: pipenv
+    executable: pip3
+    state: latest
+  with_items:
+    - prospector
+    - pipenv
+    - virtualenv
+    - twine

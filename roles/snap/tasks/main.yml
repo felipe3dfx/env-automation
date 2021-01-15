@@ -1,4 +1,6 @@
-- name: Install Visual Studio Code
+---
+- name: Install Snap packages classic mode
+  become: true
   snap:
     name: 
       - code 
@@ -7,6 +9,7 @@
     classic: yes
 
 - name: Install Snap packages
+  become: true
   snap:
     name:
       - postman

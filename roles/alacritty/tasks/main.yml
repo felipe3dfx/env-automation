@@ -1,3 +1,4 @@
+---
 - name: Add alacritty ppa repository
   apt_repository:
     repo: ppa:mmstick76/alacritty

@@ -7,7 +7,7 @@ My lovely developer enviroment.
 ## Installation
 
 ```
-source <(curl -s https://github.com/felipe3dfx/env-automation/init.sh)
+bash < (curl -s https://raw.githubusercontent.com/felipe3dfx/env-automation/master/init.sh)
 ```
 
 If you install it from scratch, you would need some dependencies to be installed first. Use init.sh or manually install:

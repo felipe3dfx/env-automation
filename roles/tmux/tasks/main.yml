@@ -1,25 +1,24 @@
+---
 - name: Make sure tmux is present
   apt:
-    pkg:
-      - tmux
-      - xsel
-  state: present
+    name: tmux
+    state: present
 
 - name: Make sure config folders are present
   file:
     path: '{{ item }}'
     state: directory
   with_items:
-    - '~/.config/.tmux'
-    - '~/.config/.tmux/plugins'
+    - '{{ tmux_path }}'
+    - '{{ tmux_path }}/plugins'
 
 - name: Make sure tmp is present
   git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: '~/.config/.tmux/plugins/tpm'
+    dest: '{{ tmux_path }}/plugins/tpm'
     depth: 1
 
 - name: Make sure .tmux.conf is present
   template:
     src: templates/.tmux.conf.j2
-    dest: '~/.tmux.conf'
+    dest: '{{ tmux_config_path }}'

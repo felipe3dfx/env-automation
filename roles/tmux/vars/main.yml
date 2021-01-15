@@ -1,0 +1,3 @@
+---
+tmux_path: '~/.config/.tmux'
+tmux_config_path: '~/.tmux.conf'

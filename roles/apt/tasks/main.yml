@@ -1,21 +1,7 @@
-- name: Install APT packages
+---
+- name: Make sure apt packages are installed
+  become: true
   apt:
-    pkg:
-      - software-properties-common
-      - curl
-      - htop
-      - webp
-      - imagemagick
-      - bat
-      - fd-find
-      - fzf
-      - nmap
-      - ripgrep
-      - tree
-      - fonts-firacode
-      - gnome-tweak-tool
-      - gnome-boxes
-      - qtile
-      - chrome-gnome-shell
-    state: present
-    update_cache: yes
+    name: '{{ apps }}'
+    state: latest
+    update_cache: true
