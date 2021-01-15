@@ -21,7 +21,8 @@ apps:
   - chrome-gnome-shell
   - translate-shell
   - python3-pip
-  - snapd
+  - git
+  - make
   
   # Alacritty
   - cmake
