@@ -32,7 +32,6 @@ apps:
   - libegl1-mesa-dev
 
   # Rust
-  - exa
   - bat
   - delta
 
