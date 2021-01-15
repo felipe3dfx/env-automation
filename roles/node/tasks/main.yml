@@ -5,8 +5,9 @@
 
 - name: Install npm package globally.
   npm:
-    name: 
-      - neovim
-      - eslint
-      - sass-lint
+    name: '{{ item }}'
     global: yes
+  with_items:
+  - neovim
+  - eslint
+  - sass-lint
