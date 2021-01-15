@@ -1,4 +1,10 @@
 ---
+- name: Make sure zsh are present
+  become: true
+  apt:
+    pkg: zsh
+    state: present
+
 - name: Make sure variables are included
   include_vars:
     file: "{{ ansible_distribution }}.yml"
