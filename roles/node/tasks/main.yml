@@ -1,19 +1,11 @@
-- name: Set nodejs apt source
+- name: Setup Node lts
   become: true
-  template:
-    src: nodesource.list.j2
-    dest: /etc/apt/sources.list.d/nodesource.list
+  shell: bash -c "$(curl -sL https://deb.nodesource.com/setup_lts.x)"
 
-- name: Import nodejs signing key
-  become: true
-  apt_key:
-    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-    state: present
-
-- name: Install nodejs packages
+- name: Install nodejs package
   become: true
   apt:
-    pkg: nodejs
+    name: nodejs
     state: present
     update_cache: yes
 
