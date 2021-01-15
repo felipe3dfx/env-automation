@@ -7,7 +7,6 @@
       - skype
       - spotify
     classic: yes
-  when: packages['snapd'] is defined
 
 - name: Install Snap packages
   become: true
@@ -16,4 +15,3 @@
       - postman
       - vlc
       - mailspring
-  when: packages['snapd'] is defined
