@@ -4,6 +4,7 @@
     state: directory
 
 - name: Install npm package globally.
+  become: true
   npm:
     name: '{{ item }}'
     global: yes
