@@ -24,3 +24,10 @@
     - {role: 'nvim', tags: 'nvim'}
     - {role: 'alacritty', tags: 'alacritty'}
     - {role: 'docker', tags: 'docker'}
+
+  post_tasks:
+    - name: Restart
+      become: true
+      shell: sleep 2 && /sbin/shutdown -r now "Env automation completed"
+      async: 1
+      poll: 0
