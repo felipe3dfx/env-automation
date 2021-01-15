@@ -7,7 +7,7 @@
       - skype
       - spotify
     classic: yes
-  when: absible_facts['packages'] == 'snapd'
+  when: packages['snapd'] is defined
 
 - name: Install Snap packages
   become: true
@@ -16,4 +16,4 @@
       - postman
       - vlc
       - mailspring
-  when: absible_facts['packages'] == 'snapd'
+  when: packages['snapd'] is defined
