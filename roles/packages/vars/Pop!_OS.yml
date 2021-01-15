@@ -21,8 +21,13 @@ apps:
   - gnome-tweak-tool
   - chrome-gnome-shell
   - translate-shell
-  - snapd
   - python3-pip
+  - snapd
+
+  # Rust
+  - exa
+  - bat
+  - delta
 
   # Neovim
   - neovim
@@ -35,8 +40,3 @@ apps:
 
   # Docker
   - docker
-
-rust:
-  - exa
-  - bat
-  - delta

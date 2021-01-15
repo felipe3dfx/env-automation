@@ -6,9 +6,6 @@
     state: latest
     update_cache: true
 
-- name: Make sure rust packages are installed
+- name: Install rust
   become: true
-  apt:
-    name: '{{ rust }}'
-    state: latest
-    update_cache: true
+  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y

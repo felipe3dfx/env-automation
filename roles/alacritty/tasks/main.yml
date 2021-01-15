@@ -1,12 +1,7 @@
 ---
-- name: Add alacritty ppa repository
-  apt_repository:
-    repo: ppa:mmstick76/alacritty
-
-- name: Make sure alacritty is present
-  apt:
-    pkg: alacritty
-    state: present
+- name: install Alacritty
+  become: true
+  shell: cargo install alacritty
 
 - name: Make sure config directory is present
   file:
