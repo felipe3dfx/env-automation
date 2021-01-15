@@ -1,7 +1,7 @@
 ---
 - name: install Alacritty
   become: true
-  shell:  ~/.cargo/bin/rustup run stable cargo install alacritty
+  shell:  ~/.cargo/bin/cargo install alacritty
 
 - name: Make sure config directory is present
   file:
