@@ -1,14 +1,3 @@
-- name: Setup Node lts
-  become: true
-  shell: bash -c "$(curl -sL https://deb.nodesource.com/setup_lts.x)"
-
-- name: Install nodejs package
-  become: true
-  apt:
-    name: nodejs
-    state: present
-    update_cache: yes
-
 - name: Make sure nvm folder present
   file:
     path: ~/.nvm
