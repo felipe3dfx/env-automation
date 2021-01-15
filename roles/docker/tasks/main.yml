@@ -7,16 +7,16 @@
       - docker-compose
     update_cache: yes
 
-- name: Make sure docker service is running
-  become: true
-  systemd:
-    name: docker
-    state: started
-    enabled: yes
-
 - name: adding existing user '{{ var_user }}' to group docker
   become: true
   user:
     name: '{{ var_user }}'
     groups: docker
     append: yes
+
+- name: Make sure docker service is running
+  become: true
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
