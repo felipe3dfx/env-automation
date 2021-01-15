@@ -5,21 +5,3 @@
 
 - include: "{{ ansible_distribution }}.yml"
   tags: packages
-
-- name: Make sure apt packages are installed
-  become: true
-  apt:
-    name: '{{ apps }}'
-    state: latest
-    update_cache: true
-
-- name: install rust by rustup
-  become: true
-  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
-
-- name: Make sure rust packages are installed
-  become: true
-  apt:
-    name: '{{ rust }}'
-    state: latest
-    update_cache: true
