@@ -3,7 +3,6 @@ apps:
   - software-properties-common
   - webp
   - curl
-  - ctags
   - fzf
   - git
   - htop
