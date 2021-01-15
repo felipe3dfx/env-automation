@@ -10,4 +10,4 @@
   shell: "curl https://sh.rustup.rs -sSf | sh -s -- -y"
 
 - name: install exa
-  shell: "{{ home }}/.cargo/bin/cargo install exa"
+  shell: ~/.cargo/bin/cargo install exa

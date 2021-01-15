@@ -1,7 +1,6 @@
 ---
 - name: install Alacritty
-  become: true
-  shell: "{{ home }}/.cargo/bin/cargo install alacritty"
+  shell: ~/.cargo/bin/cargo install alacritty
 
 - name: Make sure config directory is present
   file:
