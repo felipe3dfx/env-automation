@@ -20,7 +20,6 @@ apps:
   - fd-find
   - fonts-firacode
   - gnome-tweak-tool
-  - qtile
   - chrome-gnome-shell
   - translate-shell
 
