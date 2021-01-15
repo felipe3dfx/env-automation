@@ -21,6 +21,7 @@ apps:
   - gnome-tweak-tool
   - chrome-gnome-shell
   - translate-shell
+  - python3-pip
 
   # Neovim
   - neovim
