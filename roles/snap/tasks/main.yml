@@ -3,8 +3,6 @@
   become: true
   snap:
     name: 
-      - code 
-      - skype
       - spotify
     classic: yes
 
@@ -13,5 +11,4 @@
   snap:
     name:
       - postman
-      - vlc
       - mailspring
