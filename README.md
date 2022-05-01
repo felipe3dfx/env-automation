@@ -7,7 +7,7 @@ My lovely developer enviroment.
 ## Installation
 
 ```
-bash < (curl -s https://raw.githubusercontent.com/felipe3dfx/env-automation/master/init.sh)
+curl -s https://raw.githubusercontent.com/felipe3dfx/env-automation/master/init.sh | bash
 ```
 
 If you install it from scratch, you would need some dependencies to be installed first. Use init.sh or manually install:
@@ -23,18 +23,13 @@ make install
 
 ## Features
 
-* Ubuntu/Pop!_OS defaults configuration
-* Apps installation via apt, snap
+* Pop!_OS defaults configuration
+* Apps installation via apt
 * Snazzy theme for NVIM, ZSH, Alacrity
-* ZSH configuration, aliases, mappings, completition etc.
+* ZSH configuration, aliases, mappings, completion etc.
 * VIM configuration, mappings, custom functions etc.
 * Alacritty as main terminal app
 * Tmux configuration, plugins, keybindings (terminal tabs)
-
-## TODO
-
-* VSCode Configuration
-* Gnome extensions
 
 ## License
 

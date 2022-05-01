@@ -1,7 +1,4 @@
 ---
-- name: install Alacritty
-  shell: ~/.cargo/bin/cargo install alacritty
-
 - name: Make sure config directory is present
   file:
     path: ~/.config/alacritty

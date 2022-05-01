@@ -1,10 +1,4 @@
 ---
-- name: Make sure tmux is present
-  become: true
-  apt:
-    name: tmux
-    state: present
-
 - name: Make sure config folders are present
   file:
     path: '{{ item }}'

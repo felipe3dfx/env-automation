@@ -1,4 +1,13 @@
 ---
+- name: Download pip installer
+  get_url:
+    url: https://bootstrap.pypa.io/get-pip.py
+    dest: /tmp/get-pip.py
+
+- name: Install PIP
+  become: true
+  command: python3 /tmp/get-pip.py
+
 - name: Install python packages
   become: true
   pip:
@@ -6,7 +15,6 @@
     executable: pip3
     state: latest
   with_items:
-    - prospector
     - pipenv
     - virtualenv
     - twine

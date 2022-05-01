@@ -2,4 +2,10 @@
   become: true
   lineinfile:
     dest: /etc/sudoers
-    line: '{{ var_user }} ALL=(ALL) NOPASSWD: ALL'
+    line: "{{ lookup('env','USER') }} ALL=(ALL) NOPASSWD: ALL"
+
+- name: Instaling Iosevka
+  become: true
+  command: './install-fonts.sh {{ IOSEVKA_VERSION }}'
+  args:
+    chdir: /tmp/env-automation/scripts/

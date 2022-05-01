@@ -1,35 +1,25 @@
 ---
 apps:
   - software-properties-common
-  - webp
   - curl
   - fzf
-  - git
   - htop
   - imagemagick
-  - jq
   - nmap
   - tldr
-  - tor
   - tree
   - wget
-  - yamllint
   - unzip
   - fd-find
-  - fonts-firacode
-  - gnome-tweak-tool
-  - chrome-gnome-shell
   - translate-shell
-  - python3-pip
-  - snapd
+  - alacritty
+  - 1password
+  - tmux
+  - apt-transport-https
+  - ca-certificates
 
-  # Alacritty
-  - cmake
-  - pkg-config
-  - libfreetype6-dev
-  - libfontconfig1-dev
-  - libxcb-xfixes0-dev
-  - libegl1-mesa-dev
+  # Zsh
+  - zsh
 
   # Rust
   - exa
@@ -40,10 +30,10 @@ apps:
   - neovim
   - ripgrep
 
-  # Node
-  - nodejs
-  - yarn
-  - npm
-
   # Docker
-  - docker
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-compose-plugin
+
+  - httpie

@@ -1,10 +1,66 @@
 ---
+- name: Add the key for the 1Password apt repository
+  become: true
+  apt_key:
+    url: https://downloads.1password.com/linux/keys/1password.asc
+    keyring: /usr/share/keyrings/1password-archive-keyring.gpg
+    state: present
+
+- name: Add the 1Password apt repository
+  become: true
+  template:
+    src: 1password.list.j2
+    dest: /etc/apt/sources.list.d/1password.list
+
+- name: Add 1passord folder pol
+  become: true
+  file:
+    path: /etc/debsig/policies/AC2D62742012EA22/
+    state: directory
+
+- name: Add the debsig verify policy pol
+  become: true
+  get_url:
+    url: https://downloads.1password.com/linux/debian/debsig/1password.pol
+    dest: /etc/debsig/policies/AC2D62742012EA22/1password.pol
+
+- name: Add 1passord folder gpg
+  become: true
+  file:
+    path: /usr/share/debsig/keyrings/AC2D62742012EA22
+    state: directory
+
+- name: Add the debsig verify policy gpg
+  become: true
+  apt_key:
+    url: https://downloads.1password.com/linux/keys/1password.asc
+    keyring: /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+    state: present
+
 - name: Make sure apt packages are installed
   become: true
   apt:
     name: '{{ apps }}'
     state: latest
     update_cache: true
+
+- name: Install deb packages
+  become: true
+  apt:
+    deb: 'https://downloads.slack-edge.com/releases/linux/{{ SLACK_VERSION }}/prod/x64/slack-desktop-{{ SLACK_VERSION }}-amd64.deb'
+
+- name: Add the Docker apt repository
+  become: true
+  template:
+    src: docker.list.j2
+    dest: /etc/apt/sources.list.d/docker.list
+
+- name: Add the key for the Docker apt repository
+  become: true
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /usr/share/keyrings/docker-archive-keyring.gpg
+    state: present
 
 - name: Install rust
   shell: "curl https://sh.rustup.rs -sSf | sh -s -- -y"

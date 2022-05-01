@@ -1,8 +1,3 @@
-- name: Make sure git related packages are present
-  apt:
-    pkg: git
-    state: present
-
 - name: Make .gitconfig is present
   template:
     src: templates/.gitconfig.j2

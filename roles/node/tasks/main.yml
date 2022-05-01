@@ -1,3 +1,4 @@
+---
 - name: Make sure nvm folder present
   file:
     path: ~/.nvm
@@ -9,6 +10,4 @@
     name: '{{ item }}'
     global: yes
   with_items:
-  - neovim
   - eslint
-  - sass-lint

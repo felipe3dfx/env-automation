@@ -16,6 +16,9 @@ DISABLE_AUTO_TITLE=false
 ENABLE_CORRECTION=false
 COMPLETION_WAITING_DOTS=true
 
+setopt ignore_eof # don't exit on ctrl-d
+setopt share_history # share history between zsh sessions
+
 #---------------------------------------------
 # Exports
 #---------------------------------------------
@@ -26,7 +29,7 @@ export NODE_MODULES_BIN=./node_modules/.bin
 export JAVA_HOME={{ JAVA_HOME }}
 export CARGO_HOME=~/.cargo
 export ZPLUG_HOME={{ ZPLUG_HOME }}
-export PATH=$HOME/bin:/usr/local/bin:$PATH:$JAVA_HOME/bin:$GCPATH/bin:$GOPATH/bin:$NODE_MODULES_BIN:$CARGO_HOME/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$JAVA_HOME/bin:$NODE_MODULES_BIN:$CARGO_HOME/bin:$PATH
 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR="vim"
@@ -46,9 +49,10 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 #---------------------------------------------
 # Plugins
 #---------------------------------------------
-export NVM_LAZY_LOAD=true
+export NVM_LAZY_LOAD=false
 source $ZPLUG_HOME/init.zsh
 
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
 zplug "plugins/dotenv", from:oh-my-zsh
@@ -64,8 +68,7 @@ zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 zplug "rupa/z", use:z.sh
 
 zplug "lukechilds/zsh-nvm"
-
-zplug "asdf-vm/asdf", use:asdf.sh
+zplug "Aloxaf/fzf-tab"
 
 if ! zplug check; then
     printf "Install? [y/N]: "
@@ -76,10 +79,13 @@ fi
 
 zplug load
 
+enable-fzf-tab
+
 #---------------------------------------------
 # Bindings
 #---------------------------------------------
 bindkey '^ ' fzf-history-widget
+bindkey '^F' fzf-file-widget
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -97,7 +103,7 @@ alias e="$EDITOR"
 alias sed=gsed
 {% endif %}
 
-alias cat="batcat --theme 'Monokai Extended Origin'"
+alias cat="bat --theme 'Monokai Extended Origin'"
 alias ls=exa
 
 alias l="ls -1"
@@ -148,14 +154,16 @@ alias gcpc="git cherry-pick --continue"
 
 alias gpr="git pull -r"
 alias gl="git log"
-alias glm="git log --author='{{ FULLNAME }}'"
+alias glm="git log --author='{{ USER_FULLNAME }}'"
 
 alias gp="git push -u origin HEAD"
 alias gp!="gp --no-verify"
 alias gpf="gp --force-with-lease"
 alias gpf!="gp! --force-with-lease"
 
-alias gsh="git show"
+gsh() {
+  git show -- $@ ':!Pipfile.lock' ':!package-lock.json' ':!yarn.lock'
+}
 
 alias gs="git stash"
 alias gsp="git stash pop"
@@ -247,24 +255,14 @@ upsearch() {
 # fzf_npm_script - opens fzf for npm script
 # selection. Prints selected script back
 _fzf_npm_script() {
-  local npm_script
-  npm_script=$(cat ./package.json | jq -r '.scripts | keys | .[]' | fzf)
-  echo "$npm_script"
-}
-
-_run_npm_script() {
   if [[ ! -f './package.json' ]]; then
     echo "no package.json file!"
     return 0
   fi
 
   local npm_script
-  npm_script=$(_fzf_npm_script)
-  if [ -z "$npm_script" ]; then
-    return 0
-  fi
-  echo "$1 run $npm_script"
-  "$1" run "$npm_script"
+  npm_script=$(cat ./package.json | jq -r '.scripts | keys | .[]' | fzf)
+  echo "$npm_script"
 }
 
 _get_npm_client() {
@@ -285,7 +283,32 @@ _get_npm_client() {
 # Opens fzf with list of available scripts
 # runs selected script
 nr() {
-  _run_npm_script $(_get_npm_client)
+  local npm_client
+  npm_client=$(_get_npm_client)
+  if [ -z "$npm_client" ]; then
+    echo "no package-lock.json or yarn.lock"
+    return 0
+  fi
+
+  local npm_script
+  npm_script=$(_fzf_npm_script)
+  if [ -z "$npm_script" ]; then
+    return 0
+  fi
+  echo "$npm_client run $npm_script"
+  "$npm_client" run "$npm_script"
+}
+
+ni() {
+  local npm_client
+  npm_client=$(_get_npm_client)
+  if [ -z "$npm_client" ]; then
+    echo "no package-lock.json or yarn.lock"
+    return 0
+  fi
+
+  echo "$npm_client" install
+  "$npm_client" install
 }
 
 npm_uninstall_globals() {
@@ -311,27 +334,7 @@ ar() {
   run_ansible_role
 }
 
-alias serve='browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000'
 
-#---------------------------------------------
-# Color scheme
-#---------------------------------------------
-setopt PROMPT_SUBST
 
-RUNO_ARROW_ICON=${RUNO_ARROW_ICON:-➜ }
-
-PROMPT="%(?:%F{green}:%F{red})"
-PROMPT+='${RUNO_ARROW_ICON}'
-PROMPT+="%F{red}%B%c "
-PROMPT+='%f%b'
-
-# export EXA_COLORS="di=35"
-
-# Monokai
-export FZF_DEFAULT_OPTS='
-  --reverse
-  --color fg:#F8F8F2,bg:#272822,hl:67,fg+:252,bg+:235,hl+:81
-  --color info:144,prompt:161,spinner:135,pointer:135,marker:118
-'
-
-export FZF_PREVIEW_COMMAND='batcat --theme Monokai Extended Origin {}'
+alias uuid='uuidgen'
+alias cargo_installed='cargo install --list'
