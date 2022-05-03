@@ -4,6 +4,12 @@
     dest: /etc/sudoers
     line: "{{ lookup('env','USER') }} ALL=(ALL) NOPASSWD: ALL"
 
+- name: Upgrade system packages
+  become: true
+  apt:
+    upgrade: dist
+    update_cache: yes
+
 - name: Ensure fonts directory
   file:
     path: "{{ lookup('env', 'HOME') }}/.fonts"
