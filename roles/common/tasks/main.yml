@@ -16,10 +16,22 @@
 
 - name: Download Iosevka
   when: iosevka_exists is failed
-  ansible.builtin.unarchive:
-    src: "https://github.com/be5invis/Iosevka/releases/download/v{{ IOSEVKA_VERSION }}/ttf-iosevka-{{ IOSEVKA_VERSION }}.zip"
+  get_url:
+    url: "https://github.com/be5invis/Iosevka/releases/download/v{{ IOSEVKA_VERSION }}/ttf-iosevka-{{ IOSEVKA_VERSION }}.zip"
     dest: "{{ lookup('env', 'HOME') }}/.fonts/"
-    remote_src: yes
+    timeout: 1800
+  retries: 10
+    delay: 3
+    register: result
+    until: result is succeeded
+    no_log: false
+    ignore_errors: True
+
+- name: Unzip Iosevka
+  when: iosevka_exists is failed
+  ansible.builtin.unarchive:
+    src: "{{ lookup('env', 'HOME') }}/.fonts/ttf-iosevka-{{ IOSEVKA_VERSION }}.zip"
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
 
 - name: Refresh font cache
   when: iosevka_exists is failed
