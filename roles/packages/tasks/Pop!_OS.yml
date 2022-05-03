@@ -64,3 +64,6 @@
 
 - name: Install rust
   shell: "curl https://sh.rustup.rs -sSf | sh -s -- -y"
+
+- name: Configure Nodejs LTS
+  shell: "curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -"
