@@ -18,7 +18,8 @@ If you install it from scratch, you would need some dependencies to be installed
 If you have one machine that is already provisioned. You can setup a fresh one remotelly.
 
 ```
-make install
+ansible-playbook playbook.yml --ask-become-pass
+ansible-playbook playbook.yml --tags=vars,$(tags) --ask-become-pass
 ```
 
 ## Features
