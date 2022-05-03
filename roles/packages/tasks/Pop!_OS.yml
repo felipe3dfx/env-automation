@@ -37,14 +37,7 @@
     keyring: /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
     state: present
 
-- name: Make sure apt packages are installed
-  become: true
-  apt:
-    name: '{{ apps }}'
-    state: latest
-    update_cache: true
-
-- name: Install deb packages
+- name: Install Slack
   become: true
   apt:
     deb: 'https://downloads.slack-edge.com/releases/linux/{{ SLACK_VERSION }}/prod/x64/slack-desktop-{{ SLACK_VERSION }}-amd64.deb'
@@ -61,6 +54,13 @@
     url: https://download.docker.com/linux/ubuntu/gpg
     keyring: /usr/share/keyrings/docker-archive-keyring.gpg
     state: present
+
+- name: Make sure apt packages are installed
+  become: true
+  apt:
+    name: '{{ apps }}'
+    state: latest
+    update_cache: true
 
 - name: Install rust
   shell: "curl https://sh.rustup.rs -sSf | sh -s -- -y"
