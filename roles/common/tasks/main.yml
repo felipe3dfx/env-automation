@@ -2,23 +2,23 @@
   become: true
   lineinfile:
     dest: /etc/sudoers
-    line: '{{ lookup('env','USER') }} ALL=(ALL) NOPASSWD: ALL'
+    line: "{{ lookup('env','USER') }} ALL=(ALL) NOPASSWD: ALL"
 
 - name: Ensure fonts directory
   file:
-    path: '{{ lookup('env', 'HOME') }}/.fonts'
+    path: "{{ lookup('env', 'HOME') }}/.fonts"
     state: directory
 
 - name: Iosevka exists
-  shell: 'ls {{ lookup('env', 'HOME') }}/.fonts/iosevka-*.ttf'
+  shell: "ls {{ lookup('env', 'HOME') }}/.fonts/iosevka-*.ttf"
   register: iosevka_exists
   ignore_errors: yes
 
 - name: Download Iosevka
   when: iosevka_exists is failed
   ansible.builtin.unarchive:
-    src: 'https://github.com/be5invis/Iosevka/releases/download/v{{ IOSEVKA_VERSION }}/ttf-iosevka-{{ IOSEVKA_VERSION }}.zip'
-    dest: '{{ lookup('env', 'HOME') }}/.fonts/'
+    src: "https://github.com/be5invis/Iosevka/releases/download/v{{ IOSEVKA_VERSION }}/ttf-iosevka-{{ IOSEVKA_VERSION }}.zip"
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
     remote_src: yes
 
 - name: Refresh font cache
