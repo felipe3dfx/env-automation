@@ -55,16 +55,16 @@
     keyring: /usr/share/keyrings/docker-archive-keyring.gpg
     state: present
 
-- name: Make sure apt packages are installed
-  become: true
-  apt:
-    name: '{{ apps }}'
-    state: latest
-    update_cache: true
-
 - name: Install rust
   shell: "curl https://sh.rustup.rs -sSf | sh -s -- -y"
 
 - name: Configure Nodejs LTS
   become: true
   shell: "curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -"
+
+- name: Make sure apt packages are installed
+  become: true
+  apt:
+    name: '{{ apps }}'
+    state: latest
+    update_cache: true
