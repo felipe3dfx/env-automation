@@ -17,7 +17,7 @@ apps:
   - tmux
   - apt-transport-https
   - ca-certificates
-  - npm
+  - nodejs
 
   # Zsh
   - zsh
