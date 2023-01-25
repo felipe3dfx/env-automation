@@ -1,4 +1,18 @@
 ---
+- name: Make sure default tools are installed
+  apt:
+    name:
+      - gnupg
+      - software-properties-common
+      - curl
+      - ca-certificates
+      - apt-transport-https
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: yes
+  become: true
+
 - name: Add the key for the 1Password apt repository
   become: true
   apt_key:
@@ -42,18 +56,21 @@
   apt:
     deb: 'https://downloads.slack-edge.com/releases/linux/{{ SLACK_VERSION }}/prod/x64/slack-desktop-{{ SLACK_VERSION }}-amd64.deb'
 
+- name: Add Docker official GPG key
+  become: true
+  shell: |
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpghttps://download.docker.com/linux/ubuntu/gpg
+
 - name: Add the Docker apt repository
   become: true
-  template:
-    src: docker.list.j2
-    dest: /etc/apt/sources.list.d/docker.list
+  shell: |
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-- name: Add the key for the Docker apt repository
+- name: Install Docker
   become: true
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    keyring: /usr/share/keyrings/docker-archive-keyring.gpg
-    state: present
+  apt:
+    deb: 'https://desktop.docker.com/linux/main/amd64/docker-desktop-{{ DOCKER_DESKTOP_VERSION }}-amd64.deb'
 
 - name: Install rust
   shell: "curl https://sh.rustup.rs -sSf | sh -s -- -y"

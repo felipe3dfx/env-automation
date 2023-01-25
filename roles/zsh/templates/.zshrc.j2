@@ -15,6 +15,7 @@ DISABLE_LS_COLORS=true
 DISABLE_AUTO_TITLE=false
 ENABLE_CORRECTION=false
 COMPLETION_WAITING_DOTS=true
+ZSH_DOTENV_PROMPT=false
 
 setopt ignore_eof # don't exit on ctrl-d
 setopt share_history # share history between zsh sessions
@@ -24,6 +25,9 @@ setopt share_history # share history between zsh sessions
 #---------------------------------------------
 export GPG_TTY=$(tty)
 export LANG=en_US.UTF-8
+export PIPENV_VENV_IN_PROJECT=1
+
+export PIPENV_VENV_IN_PROJECT=true
 
 export NODE_MODULES_BIN=./node_modules/.bin
 export JAVA_HOME={{ JAVA_HOME }}
@@ -31,9 +35,18 @@ export CARGO_HOME=~/.cargo
 export ZPLUG_HOME={{ ZPLUG_HOME }}
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH:$JAVA_HOME/bin:$NODE_MODULES_BIN:$CARGO_HOME/bin:$PATH
 
-if [[ -n $SSH_CONNECTION ]]; then
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+fi
+
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+elif [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR="vim"
   export EDITOR="vim"
 else
+  export VISUAL="nvim"
   export EDITOR="nvim"
 fi
 
@@ -137,9 +150,6 @@ alias tmks="tmux kill-server"
 cheat() {
   curl cheat.sh/$@
 }
-
-alias hm="man"
-alias hc="cheat"
 
 if type "$kubectl" > /dev/null; then
   alias k8s="kubectl"

@@ -3,9 +3,9 @@
   connection: local
 
   vars:
-    IOSEVKA_VERSION: 15.2.0
-    SLACK_VERSION: 4.25.0
-    DOCKER_COMPOSE_VERSION: v2.5.0
+    IOSEVKA_VERSION: 17.1.0
+    SLACK_VERSION: 4.29.149
+    DOCKER_DESKTOP_VERSION: 4.16.2
 
   vars_prompt:
     - name: 'USER_FULLNAME'

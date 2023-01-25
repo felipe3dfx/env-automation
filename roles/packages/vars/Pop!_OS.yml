@@ -3,12 +3,14 @@ apps:
   - software-properties-common
   - curl
   - fzf
+  - git
   - htop
   - imagemagick
   - nmap
   - tldr
   - tree
   - wget
+  - yamllint
   - unzip
   - fd-find
   - translate-shell
@@ -17,24 +19,22 @@ apps:
   - tmux
   - apt-transport-https
   - ca-certificates
-  - nodejs
-
-  # Zsh
-  - zsh
-
-  # Rust
-  - exa
-  - bat
-  - delta
+  - httpie
+  - hexyl
 
   # Neovim
   - neovim
   - ripgrep
 
-  # Docker
-  - docker-ce
-  - docker-ce-cli
-  - containerd.io
-  - docker-compose-plugin
+  # Node
+  - nodejs
 
-  - httpie
+  # Zsh
+  - zsh
+
+cargo:
+  - exa
+  - bat
+  - git-delta
+  - xsv
+  - code-minimap
