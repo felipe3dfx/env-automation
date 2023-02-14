@@ -21,6 +21,7 @@ apps:
   - ca-certificates
   - httpie
   - hexyl
+  - ncdu
 
   # Neovim
   - neovim
